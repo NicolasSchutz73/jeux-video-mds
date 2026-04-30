@@ -38,8 +38,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.linearVelocity = _movement * _speed;
-        
         _animator.SetFloat("Horizontal", _movement.x);
         _animator.SetFloat("Vertical", _movement.y);
+        _animator.SetFloat("Velocity", _movement.sqrMagnitude);
+        
+        if (_movement.sqrMagnitude > 0.01f) 
+        {
+            _animator.SetFloat("LastHorizontal", _movement.x);
+            _animator.SetFloat("LastVertical", _movement.y);
+        }
     }
 }
