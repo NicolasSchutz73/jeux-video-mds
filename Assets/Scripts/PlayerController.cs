@@ -16,12 +16,14 @@ public class PlayerController : MonoBehaviour
 
     // Direction de mouvement recue depuis le clavier/manette (x, y).
     private Vector2 _movement;
+    private Animator _animator;
 
     // Awake est appelee une seule fois au demarrage de l'objet.
     // On recupere ici le Rigidbody2D attache au meme GameObject.
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _animator =  GetComponent<Animator>();
     }
 
     // Methode appelee par l'action "Move" du nouveau Input System.
@@ -36,5 +38,8 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _rb.linearVelocity = _movement * _speed;
+        
+        _animator.SetFloat("Horizontal", _movement.x);
+        _animator.SetFloat("Vertical", _movement.y);
     }
 }
