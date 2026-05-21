@@ -15,13 +15,19 @@ public class RupeeManager : MonoBehaviour
     private readonly List<Rupee> _rupees = new();
     private Coroutine _spawnRoutine;
 
-    private void Start()
+    public void ResetRupees()
     {
-        StartSpawning();
+        StopSpawning();
+        foreach (var rupee in _rupees)
+        {
+            if (rupee != null) Destroy(rupee.gameObject);
+        }
+        _rupees.Clear();
     }
-
-    private void StartSpawning()
+    
+    public void StartSpawning()
     {
+        if (_spawnRoutine != null) return;
         _spawnRoutine = StartCoroutine(SpawnRoutine());
     }
 

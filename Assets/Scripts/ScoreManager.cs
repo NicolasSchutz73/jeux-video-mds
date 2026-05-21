@@ -7,6 +7,11 @@ public class ScoreManager : MonoBehaviour
     
     public int Score => _score;
 
+    public void ResetScore()
+    {
+        _score = 0;
+    }
+
     public void IncreaseScore()
     {
         _score += 1;
